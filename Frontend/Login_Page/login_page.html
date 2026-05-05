@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Sets character encoding for the page -->
+  <meta charset="UTF-8" />
+
+  <!-- Makes the page responsive on mobile screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Title shown on the browser tab -->
+  <title>Intelligent Academic Event Reminder System</title>
+
+  <!-- Link to our external CSS file (style.css) -->
+  <link rel="stylesheet" href="login_page.css" />
+
+  <!-- Google Font: 'Poppins' for a clean, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== BACKGROUND SECTION ===================== -->
+  <!-- This is the full-page blue gradient background area at the top -->
+  <div class="background">
+
+    <!-- --------- PAGE TITLE (shown above the card) --------- -->
+    <div class="page-title">
+      <h1>Intelligent Academic Event Reminder System</h1>
+      <p>Stay updated with academic events</p>
+    </div>
+
+    <!-- ===================== LOGIN CARD ===================== -->
+    <!-- The white rounded box containing the form -->
+    <div class="login-card">
+
+      <!-- --------- EMAIL FIELD --------- -->
+      <div class="form-group">
+        <!-- Label for the email input -->
+        <label for="email">Email</label>
+
+        <!-- Email input box -->
+        <input
+          type="email"
+          id="email"
+          placeholder="user@iitp.ac.in"
+        />
+
+        <!-- Helper text below the input -->
+        <small>Use your institute email</small>
+      </div>
+
+      <!-- --------- ROLE SELECTOR --------- -->
+      <div class="form-group">
+        <!-- Label for the role toggle -->
+        <label>Role</label>
+
+        <!-- Toggle buttons: Admin / Student -->
+        <div class="role-toggle">
+          <!-- Admin button — starts as inactive (white) -->
+          <button class="role-btn" id="adminBtn" onclick="selectRole('admin')">
+            Admin
+          </button>
+
+          <!-- Student button — starts as active (blue) -->
+          <button class="role-btn active" id="studentBtn" onclick="selectRole('student')">
+            Student
+          </button>
+        </div>
+      </div>
+
+      <!-- --------- PASSWORD FIELD --------- -->
+      <div class="form-group">
+        <!-- Label for the password input -->
+        <label for="password">Password</label>
+
+        <!-- Wrapper to hold the lock icon + input together -->
+        <div class="password-wrapper">
+          <!-- Lock icon (using a Unicode character) -->
+          <span class="lock-icon">🔒</span>
+
+          <!-- Password input box -->
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <!-- Forgot password link -->
+        <a href="#" class="forgot-link">Forgot Password?</a>
+      </div>
+
+      <!-- --------- LOGIN BUTTON --------- -->
+      <button class="login-btn" onclick="handleLogin()">Log In</button>
+
+    </div>
+    <!-- END of login-card -->
+
+  </div>
+  <!-- END of background -->
+
+  <script type="module" src="login_page.js"></script>
+
+</body>
+</html>

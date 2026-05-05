@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <!-- Link to our external CSS file -->
+  <link rel="stylesheet" href="admin_dashboard.css" />
+
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== OUTER WRAPPER ===================== -->
+  <div class="page-wrapper">
+
+    <!-- ===================== PHONE CARD ===================== -->
+    <div class="phone-card">
+
+
+      <!-- ===================== HEADER ===================== -->
+      <!-- Blue top bar with title and admin avatar -->
+      <div class="header">
+        <h1 class="header-title">Intelligent Academic Event Reminder System</h1>
+
+        <!-- Admin avatar with a dropdown arrow -->
+        <div class="avatar-wrapper">
+          <div class="avatar">🧑‍💼</div>
+          <span class="dropdown-arrow">▾</span>
+        </div>
+      </div>
+      <!-- END header -->
+
+
+      <!-- ===================== ADD EVENT BUTTON ===================== -->
+      <!-- White bar below header with the "Add Event" button -->
+      <div class="add-event-bar">
+        <!-- Clicking this opens the Add Event modal -->
+        <button class="btn-add-event" onclick="openAddModal()">+ &nbsp; Add Event</button>
+      </div>
+
+
+      <!-- ===================== MAIN CONTENT ===================== -->
+      <div class="content">
+
+
+        <!-- --------- OVERVIEW SECTION --------- -->
+        <h2 class="section-title">Overview</h2>
+
+        <!-- Three stat cards side by side -->
+        <div class="overview-grid">
+
+          <!-- Stat card 1: Total Events -->
+          <div class="stat-card">
+            <div class="stat-icon blue-icon">📅</div>
+            <div class="stat-number">12</div>
+            <div class="stat-label">Total Events</div>
+          </div>
+
+          <!-- Stat card 2: Upcoming Events -->
+          <div class="stat-card">
+            <div class="stat-icon grey-icon">🕐</div>
+            <div class="stat-number">5</div>
+            <div class="stat-label">Upcoming Events</div>
+          </div>
+
+          <!-- Stat card 3: Completed Events -->
+          <div class="stat-card">
+            <div class="stat-icon green-icon">✅</div>
+            <div class="stat-number">7</div>
+            <div class="stat-label">Completed Events</div>
+          </div>
+
+        </div>
+        <!-- END overview-grid -->
+
+
+        <!-- --------- EVENTS MANAGEMENT SECTION --------- -->
+        <h2 class="section-title">Events Management</h2>
+
+        <!-- ---- EVENT CARD 1: Workshop on Data Science ---- -->
+        <div class="event-card" id="event-card-1">
+
+          <div class="event-header">
+            <h3 class="event-title">Workshop on Data Science</h3>
+            <!-- Orange "Upcoming" status badge -->
+            <span class="status-badge upcoming">Upcoming</span>
+          </div>
+
+          <p class="event-meta">📅 June 5, 2024 | 2:00 PM &nbsp;•&nbsp; Seminar Room</p>
+
+          <hr class="divider" />
+
+          <p class="event-desc">Hands-on session on data analytics.</p>
+
+          <!-- Edit and Delete buttons for this card -->
+          <div class="btn-row">
+            <!-- Edit button: passes this card's ID and pre-fill data -->
+            <button class="btn btn-outline-edit"
+              onclick="openEditModal('event-card-1', 'Workshop on Data Science', '2024-06-05', '14:00', 'Seminar Room', 'Hands-on session on data analytics.')">
+              ✏️ Edit
+            </button>
+            <!-- Delete button: passes card ID and event name -->
+            <button class="btn btn-blue-delete"
+              onclick="openDeleteModal('event-card-1', 'Workshop on Data Science')">
+              🗑️ Delete
+            </button>
+          </div>
+
+        </div>
+        <!-- END event card 1 -->
+
+
+        <!-- ---- EVENT CARD 2: Annual Tech Fest ---- -->
+        <div class="event-card" id="event-card-2">
+
+          <div class="event-header">
+            <h3 class="event-title">Annual Tech Fest</h3>
+            <!-- Orange "Ongoing" status badge -->
+            <span class="status-badge ongoing">Ongoing</span>
+          </div>
+
+          <p class="event-meta">📅 July 15, 2024 | 9:00 AM &nbsp;•&nbsp; Main Auditorium</p>
+
+          <hr class="divider" />
+
+          <p class="event-desc">Tech exhibition and competitions.</p>
+
+          <!-- Edit and Delete buttons for this card -->
+          <div class="btn-row">
+            <!-- Green edit button (second card has green edit per design) -->
+            <button class="btn btn-green-edit"
+              onclick="openEditModal('event-card-2', 'Annual Tech Fest', '2024-07-15', '09:00', 'Main Auditorium', 'Tech exhibition and competitions.')">
+              ✏️ Edit
+            </button>
+            <button class="btn btn-blue-delete"
+              onclick="openDeleteModal('event-card-2', 'Annual Tech Fest')">
+              🗑️ Delete
+            </button>
+          </div>
+
+        </div>
+        <!-- END event card 2 -->
+
+
+        <!-- --------- INFO SECTION --------- -->
+        <div class="info-section">
+          <p class="info-heading">ℹ️ Info</p>
+          <div class="info-box">
+            <!-- Info message about automatic notifications -->
+            <p>ℹ️ <strong>Notifications</strong> scheduled automatically (30, 15, 5 mins before event)</p>
+          </div>
+        </div>
+
+
+        <!-- --------- EMPTY STATE --------- -->
+        <div class="empty-state">
+          <div class="empty-illustration">
+            <div class="illustration-bg"></div>
+            <div class="clipboard-icon">📋✅</div>
+          </div>
+          <p class="empty-title">You're all caught up!</p>
+          <p class="empty-sub">No events available.</p>
+        </div>
+
+
+      </div>
+      <!-- END content -->
+
+    </div>
+    <!-- END phone-card -->
+
+  </div>
+  <!-- END page-wrapper -->
+
+
+  <!-- ============================================================ -->
+  <!--          MODAL 1: ADD EVENT MODAL                            -->
+  <!-- Hidden by default. Opens when "Add Event" button is clicked  -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="add-modal">
+    <div class="modal-card">
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h3 class="modal-title">Add Event</h3>
+        <!-- X button to close modal -->
+        <button class="modal-close" onclick="closeModal('add-modal')">✕</button>
+      </div>
+
+      <!-- Modal form fields -->
+      <div class="modal-body">
+
+        <!-- Event Title -->
+        <div class="field-group">
+          <label for="add-title">Event Title</label>
+          <input type="text" id="add-title" placeholder="Enter event title" />
+        </div>
+
+        <!-- Date -->
+        <div class="field-group">
+          <label for="add-date">Date</label>
+          <input type="date" id="add-date" />
+        </div>
+
+        <!-- Time -->
+        <div class="field-group">
+          <label for="add-time">Time</label>
+          <input type="time" id="add-time" />
+        </div>
+
+        <!-- Venue -->
+        <div class="field-group">
+          <label for="add-venue">Venue</label>
+          <input type="text" id="add-venue" placeholder="Enter venue" />
+        </div>
+
+        <!-- Description -->
+        <div class="field-group">
+          <label for="add-desc">Description</label>
+          <textarea id="add-desc" placeholder="Enter event description" rows="3"></textarea>
+        </div>
+
+      </div>
+
+      <!-- Modal action buttons -->
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel" onclick="closeModal('add-modal')">Cancel</button>
+        <button class="btn btn-modal-save" onclick="saveEvent()">Save Event</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- END add-modal -->
+
+
+  <!-- ============================================================ -->
+  <!--          MODAL 2: EDIT EVENT MODAL                           -->
+  <!-- Hidden by default. Opens when "Edit" button is clicked       -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="edit-modal">
+    <div class="modal-card">
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h3 class="modal-title">Update Event</h3>
+        <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
+      </div>
+
+      <!-- Pre-filled form fields (values are set by JavaScript) -->
+      <div class="modal-body">
+
+        <!-- Hidden input to track which card is being edited -->
+        <input type="hidden" id="edit-card-id" />
+
+        <div class="field-group">
+          <label for="edit-title">Event Title</label>
+          <input type="text" id="edit-title" placeholder="Event title" />
+        </div>
+
+        <div class="field-group">
+          <label for="edit-date">Date</label>
+          <input type="date" id="edit-date" />
+        </div>
+
+        <div class="field-group">
+          <label for="edit-time">Time</label>
+          <input type="time" id="edit-time" />
+        </div>
+
+        <div class="field-group">
+          <label for="edit-venue">Venue</label>
+          <input type="text" id="edit-venue" placeholder="Venue" />
+        </div>
+
+        <div class="field-group">
+          <label for="edit-desc">Description</label>
+          <textarea id="edit-desc" rows="3"></textarea>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel" onclick="closeModal('edit-modal')">Cancel</button>
+        <button class="btn btn-modal-save" onclick="updateEvent()">Update Event</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- END edit-modal -->
+
+
+  <!-- ============================================================ -->
+  <!--          MODAL 3: DELETE CONFIRMATION MODAL                  -->
+  <!-- Hidden by default. Opens when "Delete" button is clicked     -->
+  <!-- ============================================================ -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-card modal-card-small">
+
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Event</h3>
+        <button class="modal-close" onclick="closeModal('delete-modal')">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Trash icon for visual emphasis -->
+        <div class="delete-icon">🗑️</div>
+
+        <!-- Confirmation message — event name is inserted by JavaScript -->
+        <p class="delete-message">
+          Are you sure you want to delete <br />
+          <strong id="delete-event-name">"Workshop on Data Science"</strong>?
+        </p>
+
+        <!-- Hidden input stores which card to remove on confirm -->
+        <input type="hidden" id="delete-card-id" />
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-modal-cancel" onclick="closeModal('delete-modal')">Cancel</button>
+        <button class="btn btn-modal-delete" onclick="confirmDelete()">Yes, Delete</button>
+      </div>
+
+    </div>
+  </div>
+  <!-- END delete-modal -->
+
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script type="module" src="admin_dashboard.js"></script>
+
+</body>
+</html>

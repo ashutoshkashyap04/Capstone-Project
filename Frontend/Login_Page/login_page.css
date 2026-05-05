@@ -1,0 +1,251 @@
+/* ============================================================
+   style.css — Styles for the Academic Event Reminder Login Page
+   ============================================================ */
+
+
+/* ---- 1. RESET & BASE STYLES ----
+   Remove default browser margin/padding and set a clean font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding won't increase element size */
+}
+
+body {
+  font-family: 'Poppins', sans-serif; /* clean Google Font */
+  background-color: #f0f4ff;         /* very light background below the card */
+}
+
+
+/* ---- 2. FULL-PAGE BACKGROUND ----
+   The blue gradient area that fills the top portion of the page */
+.background {
+  min-height: 100vh;               /* at least full screen height */
+  background: linear-gradient(
+    160deg,
+    #a8c8f8 0%,    /* light sky-blue top-left */
+    #c5d8f9 40%,   /* soft blue-lavender center */
+    #dce8fc 70%,   /* very light blue */
+    #f0f4ff 100%   /* almost white at the bottom */
+  );
+  display: flex;
+  flex-direction: column;          /* stack title above card */
+  align-items: center;             /* center horizontally */
+  padding: 50px 20px 60px;         /* space around content */
+}
+
+
+/* ---- 3. PAGE TITLE (above the card) ---- */
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.page-title h1 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.15); /* subtle shadow for readability */
+}
+
+.page-title p {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+
+/* ---- 4. LOGIN CARD (the white rounded box) ---- */
+.login-card {
+  background-color: #f5f7fa;       /* off-white card background */
+  border-radius: 24px;             /* rounded corners like in the design */
+  padding: 36px 32px;              /* inner spacing */
+  width: 100%;
+  max-width: 420px;                /* limit card width on large screens */
+  box-shadow: 0 8px 30px rgba(100, 140, 200, 0.2); /* soft blue shadow */
+}
+
+
+/* ---- 5. FORM GROUP (wrapper for each field) ---- */
+.form-group {
+  margin-bottom: 24px; /* space between each field */
+}
+
+/* The label text above each input */
+.form-group label {
+  display: block;          /* label takes full width */
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a2a4a;          /* dark navy label text */
+  margin-bottom: 10px;
+}
+
+/* Small helper text below the email input */
+.form-group small {
+  display: block;
+  font-size: 12px;
+  color: #9aa5b4;          /* light grey */
+  margin-top: 6px;
+}
+
+/* Divider line below each form group */
+.form-group::after {
+  content: '';             /* empty element just for the line */
+  display: block;
+  height: 1px;
+  background-color: #dde3ed;
+  margin-top: 20px;
+}
+
+/* Remove the divider line after the last form group */
+.form-group:last-of-type::after {
+  display: none;
+}
+
+
+/* ---- 6. INPUT FIELDS (Email & Password) ---- */
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #dde3ed;   /* light grey border */
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #ffffff;
+  outline: none;                  /* remove default browser outline */
+  transition: border-color 0.2s; /* smooth border color change on focus */
+}
+
+/* Highlight border when user clicks into the input */
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  border-color: #3a7bd5;          /* blue border on focus */
+}
+
+
+/* ---- 7. ROLE TOGGLE BUTTONS ---- */
+.role-toggle {
+  display: flex;             /* place buttons side by side */
+  border: 1.5px solid #dde3ed;
+  border-radius: 10px;
+  overflow: hidden;          /* clip rounded corners to the container */
+  background-color: #ffffff;
+}
+
+/* Each role button (Admin / Student) */
+.role-btn {
+  flex: 1;                   /* both buttons share equal width */
+  padding: 13px;
+  border: none;              /* remove default button border */
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  color: #555;
+  cursor: pointer;           /* pointer cursor on hover */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Active/selected role button → blue background, white text */
+.role-btn.active {
+  background-color: #2e6ed6;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 8px;        /* slightly rounded active button */
+}
+
+
+/* ---- 8. PASSWORD FIELD WRAPPER (icon + input) ---- */
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #dde3ed;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 0 14px;
+  transition: border-color 0.2s;
+}
+
+/* Highlight border when user clicks into the password field */
+.password-wrapper:focus-within {
+  border-color: #3a7bd5;
+}
+
+/* Lock icon on the left of the password input */
+.lock-icon {
+  font-size: 18px;
+  margin-right: 10px;
+  user-select: none;         /* prevent accidentally selecting the icon */
+}
+
+/* The password input (no border — border is on the wrapper) */
+.password-wrapper input[type="password"] {
+  border: none;
+  padding: 14px 0;           /* top/bottom padding only */
+  flex: 1;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background: transparent;
+  outline: none;
+}
+
+
+/* ---- 9. FORGOT PASSWORD LINK ---- */
+.forgot-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #2e6ed6;            /* blue link color */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.forgot-link:hover {
+  color: #1a50a8;            /* darker blue on hover */
+}
+
+
+/* ---- 10. LOG IN BUTTON ---- */
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #2e6ed6;   /* solid blue button */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+
+/* Darker blue when hovering over the button */
+.login-btn:hover {
+  background-color: #1a50a8;
+}
+
+/* Slight press-down effect when clicking */
+.login-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* ---- 11. RESPONSIVE ADJUSTMENTS ----
+   On small screens, reduce padding */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px 20px;
+  }
+
+  .page-title h1 {
+    font-size: 18px;
+  }
+}

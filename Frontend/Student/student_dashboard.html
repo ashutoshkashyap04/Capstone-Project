@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Sets character encoding -->
+  <meta charset="UTF-8" />
+
+  <!-- Makes the page look good on mobile screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Browser tab title -->
+  <title>Student Dashboard</title>
+
+  <!-- Link to our external CSS file -->
+  <link rel="stylesheet" href="student_dashboard.css" />
+
+  <!-- Google Font: Poppins for clean modern text -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== OUTER WRAPPER ===================== -->
+  <!-- Centers the phone-like card on the screen -->
+  <div class="page-wrapper">
+
+    <!-- ===================== PHONE CARD ===================== -->
+    <div class="phone-card">
+
+      <!-- ===================== HEADER ===================== -->
+      <!-- Blue top bar with title and profile icon -->
+      <div class="header">
+        <h1 class="header-title">Intelligent Academic Event Reminder System</h1>
+
+        <!-- Profile avatar with notification badge -->
+        <div class="avatar-wrapper">
+          <!-- Simple avatar using an emoji as a placeholder -->
+          <div class="avatar">🧑‍💼</div>
+          <!-- Red badge showing 3 notifications -->
+          <span class="badge">3</span>
+        </div>
+      </div>
+      <!-- END header -->
+
+
+      <!-- ===================== TAB BAR ===================== -->
+      <!-- Three tabs: All Events | Upcoming | Completed -->
+      <div class="tab-bar">
+        <!-- Each tab calls switchTab() when clicked -->
+        <button class="tab-btn" id="tab-all"       onclick="switchTab('all')">All Events</button>
+        <button class="tab-btn active" id="tab-upcoming"  onclick="switchTab('upcoming')">Upcoming</button>
+        <button class="tab-btn" id="tab-completed" onclick="switchTab('completed')">Completed</button>
+      </div>
+      <!-- END tab bar -->
+
+
+      <!-- ===================== MAIN CONTENT ===================== -->
+      <div class="content">
+
+        <!-- ----------- SECTION TITLE ----------- -->
+        <h2 class="section-title">Upcoming Events</h2>
+
+        <!-- new events container -->
+        <div class="events-container"></div>
+
+
+        <!-- =========== EVENT CARD 1: Guest Lecture on AI =========== -->
+        <div class="event-card">
+
+          <!-- Top row: event name + status badge -->
+          <div class="event-header">
+            <h3 class="event-title">Guest Lecture on AI</h3>
+            <!-- Green "Upcoming" badge -->
+            <span class="status-badge upcoming">Upcoming</span>
+          </div>
+
+          <!-- Date, time and location row -->
+          <p class="event-meta">
+            📅 May 25, 2024 | 10:00 AM &nbsp;•&nbsp; Auditorium Hall
+          </p>
+
+          <!-- Divider line -->
+          <hr class="divider" />
+
+          <!-- Short description -->
+          <p class="event-desc">Lecture on advancements in Artificial Intelligence.</p>
+
+          <!-- Action buttons -->
+          <div class="btn-row">
+            <!-- White outlined button -->
+            <button class="btn btn-outline" onclick="markCompleted(this)">Mark as Completed</button>
+            <!-- Blue filled button -->
+            <button class="btn btn-blue">Remind Me</button>
+          </div>
+
+        </div>
+        <!-- END event card 1 -->
+
+
+        <!-- =========== EVENT CARD 2: Project Submission Deadline =========== -->
+        <div class="event-card">
+
+          <!-- Top row: event name + status badge -->
+          <div class="event-header">
+            <h3 class="event-title">Project Submission Deadline</h3>
+            <!-- Orange "Ongoing" badge -->
+            <span class="status-badge ongoing">Ongoing</span>
+          </div>
+
+          <!-- Date and time row (no location for this one) -->
+          <p class="event-meta">
+            🕐 May 27, 2024 | 5:00 PM
+          </p>
+
+          <!-- Divider line -->
+          <hr class="divider" />
+
+          <!-- Short description -->
+          <p class="event-desc">Submit your project report on the portal.</p>
+
+          <!-- Action buttons -->
+          <div class="btn-row">
+            <!-- Green "Completed" button (already marked) -->
+            <button class="btn btn-green">✔ Completed</button>
+            <!-- Blue filled button -->
+            <button class="btn btn-blue">Remind Me</button>
+          </div>
+
+        </div>
+        <!-- END event card 2 -->
+
+
+        <!-- =========== NOTIFICATIONS SECTION =========== -->
+        <div class="notifications-box">
+
+          <!-- Notification header row (click to expand/collapse) -->
+          <div class="notif-header" onclick="toggleNotifications()">
+            <span class="notif-title">🔔 Notifications</span>
+            <!-- Arrow icon that rotates when expanded -->
+            <span class="notif-arrow" id="notif-arrow">&#8964;</span>
+          </div>
+
+          <!-- Notification items (shown by default) -->
+          <div class="notif-list" id="notif-list">
+
+            <!-- Notification item 1 -->
+            <div class="notif-item">
+              <span class="notif-text">🕐 <strong>Event starts in 1 hour</strong></span>
+              <span class="notif-time">Just now</span>
+            </div>
+
+            <!-- Notification item 2 -->
+            <div class="notif-item">
+              <span class="notif-text">📅 <strong>New event added:</strong> Workshop on IoT</span>
+              <span class="notif-time">15m ago</span>
+            </div>
+
+            <!-- Notification item 3 -->
+            <div class="notif-item">
+              <span class="notif-text">📋 <strong>Assignment due tomorrow</strong></span>
+              <span class="notif-time">Just now</span>
+            </div>
+
+          </div>
+          <!-- END notif-list -->
+
+        </div>
+        <!-- END notifications-box -->
+
+
+        <!-- =========== EMPTY STATE (All Caught Up) =========== -->
+        <!-- Shown when there are no more events -->
+        <div class="empty-state">
+          <!-- Clipboard illustration using emoji + decoration -->
+          <div class="empty-illustration">
+            <div class="illustration-bg"></div>
+            <div class="clipboard-icon">📋✅</div>
+          </div>
+          <p class="empty-title">You're all caught up!</p>
+          <p class="empty-sub">No events available.</p>
+        </div>
+        <!-- END empty state -->
+
+      </div>
+      <!-- END content -->
+
+    </div>
+    <!-- END phone-card -->
+
+  </div>
+  <!-- END page-wrapper -->
+
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script type="module" src="student_dashboard.js"></script>
+
+</body>
+</html>
